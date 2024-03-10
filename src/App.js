@@ -1,12 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
-import Footer from './views/_layout/footer';
-
+import NavBar from './views/_layout/navBar'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <div className="App">
-      <Footer />
+        <NavBar/>
     </div>
   );
 }
