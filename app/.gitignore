@@ -1,23 +1,42 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Ignore node_modules
+node_modules/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
+# Ignore build artifacts and directories
 /build
+/dist
 
-# misc
-.DS_Store
+# Ignore local .env files
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# Ignore the .DS_Store file on macOS
+.DS_Store
+
+# Ignore the .vscode directory
+.vscode/
+
+# Ignore npm-debug.log
 npm-debug.log*
-yarn-debug.log*
+
+# Ignore yarn-error.log
 yarn-error.log*
+
+# Ignore .idea directory
+.idea/
+
+# Ignore coverage directory
+/coverage/
+
+# Ignore .cache directory
+.cache/
+
+# Ignore Jest test results
+/jest-test-results.json
+
+# Ignore Mac-specific files
+*.swp
+*.swo
+*.swn
+*.swm
