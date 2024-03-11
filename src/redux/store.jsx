@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import languageReducer from './languages';
+import Loading from './loading';
 
 const store = configureStore({
   reducer: {
-    language: languageReducer
+    Language: languageReducer,
+    Loading: Loading
   }
 });
 

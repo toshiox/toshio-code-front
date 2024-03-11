@@ -4,6 +4,12 @@ const initialState = {
   value: "en",
 };
 
+const languagesInfo = {
+  getLanguage: (state) => {
+    return state;
+  },
+};
+
 const languageSlice = createSlice({
   name: 'language',
   initialState,
@@ -13,12 +19,6 @@ const languageSlice = createSlice({
     }
   }
 });
-
-const languagesInfo = {
-  getLanguage: (state) => {
-    return state;
-  },
-};
 
 export { languagesInfo };
 export const languageActions = languageSlice.actions;
