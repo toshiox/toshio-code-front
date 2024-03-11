@@ -3,7 +3,7 @@ import languageReducer from './languages';
 
 const store = configureStore({
   reducer: {
-    language: languageReducer,
+    language: languageReducer
   }
 });
 

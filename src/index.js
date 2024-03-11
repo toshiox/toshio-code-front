@@ -6,9 +6,11 @@ import reportWebVitals from './reportWebVitals';
 
 import './components/languageSwitcher/i18n';
 import { Provider } from 'react-redux';
-import Home from './views/home/home';
 import { createBrowserRouter, RouterProvider  }from "react-router-dom";
-import store from './store/_manager'
+import store from './redux/store'
+
+import Home from './views/home/index';
+import NotFound from './views/notFound/index';
 
 const router =  createBrowserRouter([
   {
@@ -18,9 +20,13 @@ const router =  createBrowserRouter([
     {
       path:'/Home',
       element: <Home />
+    },
+    {
+      path:'*',
+      element: <NotFound />
     }
   ],
-  }]);
+}]);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

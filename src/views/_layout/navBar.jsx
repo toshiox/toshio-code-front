@@ -7,7 +7,7 @@ import { Navbar, Container, Nav, Form, Image } from 'react-bootstrap';
 import logo from './assets/logo.png';
 import './css/style.css';
 
-import { languageActions } from '../../store/languages';
+import { languageActions } from '../../redux/languages';
 
 const NavBar = () => {
   const { t, i18n } = useTranslation();
