@@ -1,0 +1,10 @@
+.material-icon{
+    height: 100px;
+    will-change: 160px;
+}
+
+.card{
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
