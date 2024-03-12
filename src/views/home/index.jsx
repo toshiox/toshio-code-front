@@ -1,5 +1,5 @@
 import './home.css'
-import {articlesSevice} from '../../services/articles'
+import { articlesSevice } from '../../services/articles'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';

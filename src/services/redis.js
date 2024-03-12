@@ -1,10 +1,14 @@
 import { apiCallers } from './global';
-const _apiRedisUrl = 'https://code-ruby-d09fcda02656.herokuapp.com/';
 
 export async function listAllArticles(selectedLanguage){
-    return await apiCallers.get(`${_apiRedisUrl}api/redis/articles/${selectedLanguage}`, false);
+    return await apiCallers.get(`api/redis/articles/${selectedLanguage}`);
+}
+
+export async function getById(id){
+    return await apiCallers.get(`api/redis/${id}`);
 }
 
 export const apiRedis = {
-    listAllArticles
+    listAllArticles,
+    getById
 };
