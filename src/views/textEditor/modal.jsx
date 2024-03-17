@@ -2,31 +2,75 @@ import Alert from '../modal/alert';
 import { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { useTranslation } from 'react-i18next';
+import { articlesSevice } from '../../services/articles';
 import { Modal, Button, Tabs, Tab, Form, Row, Col} from 'react-bootstrap';
+import { DateFunctions } from '../../services/utils/date';
 
 const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }) => {
-    const { t } = useTranslation();
-    const [id, setId] = useState('');
-    const [contentId, setContentId] = useState('');
-    const [title, setTitle] = useState('');
-    const [resume, setResume] = useState('');
-    const [subtitle, setSubtitle] = useState('');
-    const [readingTime, setReadingTime] = useState('');
-    const [tags, setTags] = useState('');
-    const [language, setLanguage] = useState('en');
-    const [showModal, setShowModal] = useState(false);
-    const [message, setMessage] = useState('');
-    const [content, setContent] = useState('');
-    const [currentContent, setCurrentContent] = useState('');
-    const [alertType, setAlertType] = useState('success');
+  const { t } = useTranslation();
+  const [id, setId] = useState('');
+  const [contentId, setContentId] = useState('');
+  const [title, setTitle] = useState('');
+  const [resume, setResume] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [readingTime, setReadingTime] = useState('');
+  const [tags, setTags] = useState('');
+  const [language, setLanguage] = useState('en');
+  const [showModal, setShowModal] = useState(false);
+  const [message, setMessage] = useState('');
+  const [content, setContent] = useState('');
+  const [currentContent, setCurrentContent] = useState('');
+  const [alertType, setAlertType] = useState('success');
   
   const handleEditorChange = (content) => { setCurrentContent(content); };
   const handleCloseAlert = () => { setShowModal(false); };
+  const handleFormSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      let result = await postArticle();
+      if(result){
+          result = await putArticleContent();
+      }
+    } catch (error) {
+      setAlertType('error');
+      onUpdate(false);
+    }
+    setShowModal(true);
+  };
+  const postArticle = async () => {
+    let content = {
+      title: title,
+      resume: resume,
+      subtitle: subtitle,
+      timeRead: readingTime,
+      tags: tags, 
+      language: language,
+      id: id
+    };
+    let result = await articlesSevice.putArticle(content);
+    setMessage(result.message);
+    setAlertType('success');
+    onUpdate(result.success);
+    return result.success;
+  }
+  const putArticleContent = async () => {
+    let payload = {
+      id: contentId,
+      articleId: id,
+      content: currentContent,
+      language: language,
+      createdAt: DateFunctions.FormatDate(new Date(), 'yyyy-MM-dd HH:mm:ss')
+    };
+    let result = await articlesSevice.putArticleContent(payload);
+    setMessage(result.message);
+    setAlertType('success');
+    onUpdate(result.success);
+    return result.success;
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       if (show && rowData) {
-        console.log(rowData)
         setId(rowData.id || '');
         setTags(rowData.tags || ''); 
         setTitle(rowData.title || '');
@@ -34,57 +78,13 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
         setLanguage(rowData.language || '');
         setSubtitle(rowData.subtitle || '');
         setReadingTime(rowData.timeRead || 0);
-        setContent(rowData.content);
+        setContent(rowData.content || '');
+        setContentId(rowData.contentId || '');
       }
     }
     fetchData();
   }, [show, rowData]);
 
-   const handleFormSubmit = async (e) => {
-//     try {
-//       e.preventDefault();
-      
-//     //   let result = await postArticle();
-//     //   if(result){
-//     //      result = await putArticleContent();
-//     //   }
-//     } catch (error) {
-//       setAlertType('error');
-//       onUpdate(false);
-//     }
-//     setShowModal(true);
-  };
-
-//   const postArticle = async () => {
-//     let content = {
-//       title: title,
-//       resume: resume,
-//       subtitle: subtitle,
-//       timeRead: readingTime,
-//       tags: tags,
-//       language: language,
-//       id: id
-//     };
-//     let result = await service.putArticle(content);
-//     setMessage(result.message);
-//     setAlertType('success');
-//     onUpdate(result.success);
-//     return result.success;
-//   }
-//   const putArticleContent = async () => {
-//     let payload = {
-//       id: contentId,
-//       articleId: id,
-//       content: currentContent,
-//       language: language,
-//       createdAt: format(new Date(), 'yyyy-MM-dd HH:mm:ss')
-//     };
-//     let result = await serviceContent.putArticleContent(payload);
-//     setMessage(result.message);
-//     setAlertType('success');
-//     onUpdate(result.success);
-//     return result.success;
-//   }
   return (
     <>
       <Modal show={show} onHide={handleClose} size={modalSize}>

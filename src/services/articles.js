@@ -10,17 +10,29 @@ export async function getHome(selectedLanguage){
 }
 
 export async function getById(id){
-    let result = await apiRedis.getById(id);
-    return result;
+    return await apiRedis.getById(id);
 }
 
 export async function getAllArticles(){
-    let result = await apiCallers.get('api/article/en');
-    return result;
+    return await apiCallers.get('api/article/en');
+}
+
+export async function putArticle(content) {
+    return await apiCallers.put(`api/article`, content);
+}
+
+export async function putArticleContent(content) {
+    console.log(content)
+    const response = await apiCallers.put(`api/articleContent`, content);
+    // await apiRedis.dispose();
+    return response.data;
 }
 
 export const articlesSevice = {
     getHome,
     getById,
-    getAllArticles
+    getAllArticles,
+
+    putArticle,
+    putArticleContent
 }

@@ -8,7 +8,12 @@ export async function getById(id){
     return await apiCallers.get(`api/redis/${id}`);
 }
 
+export async function dispose(){
+    await apiCallers.get(`api/redis/cleanMemory`);
+}
+
 export const apiRedis = {
     listAllArticles,
-    getById
+    getById,
+    dispose
 };

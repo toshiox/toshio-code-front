@@ -33,12 +33,12 @@ const TextEditor = () => {
     const fetchData = async () => {
         dispatch(loadingActions.setLoading({ isLoading: true }));
         const response = await articlesSevice.getAllArticles();
-        console.log(response)
         setArticles(response.data); 
         dispatch(loadingActions.setLoading({ isLoading: false }));
     };
     fetchData();
   },[currentLanguage]);
+
   useEffect(() => {
     setFilteredArticles(
       articles.filter((article) =>{
@@ -100,5 +100,4 @@ const TextEditor = () => {
     </div>
   );
 };
-
 export default TextEditor;
