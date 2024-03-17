@@ -1,8 +1,8 @@
-export function formatDate(dataString) {
+export function FormatDate(dataString) {
     const data = new Date(dataString);
   
     const dia = String(data.getDate()).padStart(2, '0');
-    const mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês é base 0, então adicionamos 1
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
     const ano = data.getFullYear();
     const horas = String(data.getHours()).padStart(2, '0');
     const minutos = String(data.getMinutes()).padStart(2, '0');
@@ -13,6 +13,6 @@ export function formatDate(dataString) {
     return dataFormatada;
 }
 
-export const dateFunctions = {
-    formatDate
+export const DateFunctions = {
+    FormatDate
 }

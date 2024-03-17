@@ -38,7 +38,9 @@ i18n
             Content: "Content",
             Tags: "Tags",
             Language: "Language",
-            Information: "Information"
+            Information: "Information",
+            TimeRead: "Time Read",
+            CreatedAt: "Created At"
           },
           PageNotFound: {
             Message: "I'm sorry, page not found"
@@ -82,7 +84,9 @@ i18n
             Content: "Conteúdo",
             Tags: "Tags",
             Language: "Linguagem",
-            Information: "Informacoes"
+            Information: "Informacoes",
+            TimmeRead: "Tempo de Leitura",
+            CreatedAt: "Criado em"
           },
           PageNotFound: {
             Message: "Me desculpe, pagina nao existe."

@@ -11,7 +11,7 @@ import { languageActions } from '../../redux/languages';
 
 const NavBar = () => {
   const { t, i18n } = useTranslation();
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
     const handleLanguageChange = (newLanguage) => {
       i18n.changeLanguage(newLanguage, (err, t) => {

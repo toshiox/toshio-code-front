@@ -10,6 +10,7 @@ import AboutMe from './views/aboutMe/index';
 import NotFound from './views/notFound/index';
 import Loading from './views/_layout/loading';
 import ArticleContent from './views/articleContent/index';
+import TextEditor from './views/textEditor/index';
 
 function App() {
   const isLoading = useSelector((state) => state.Loading.isLoading);
@@ -20,16 +21,17 @@ function App() {
   }, [isLoading]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '97vh' }}>
         {isLoading ? <Loading /> : null}
         <NavBar/>
         <Routes>
-          <Route path="/" element={<Navigate to="/Home" />} />
           <Route path="/Home" element={<Home />} />
+          <Route path="/" element={<Navigate to="/Home" />} />
 
-          <Route path="*" element={<Navigate to="/not-found" />} />
           <Route path="/not-found" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/not-found" />} />
 
+          <Route path="/sxz" element={<TextEditor/>}/>
           <Route path="/AboutMe" element={<AboutMe />} />
           <Route path="/Article/:id?" element={<ArticleContent />} />
         </Routes>

@@ -14,7 +14,13 @@ export async function getById(id){
     return result;
 }
 
+export async function getAllArticles(){
+    let result = await apiCallers.get('api/article/en');
+    return result;
+}
+
 export const articlesSevice = {
     getHome,
-    getById
+    getById,
+    getAllArticles
 }
