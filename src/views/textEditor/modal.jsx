@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Modal, Button, Tabs, Tab, Form, Row, Col} from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
 import Alert from '../modal/alert';
+import { useState, useEffect } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
+import { useTranslation } from 'react-i18next';
+import { Modal, Button, Tabs, Tab, Form, Row, Col} from 'react-bootstrap';
 
 const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }) => {
     const { t } = useTranslation();
@@ -19,14 +20,13 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
     const [currentContent, setCurrentContent] = useState('');
     const [alertType, setAlertType] = useState('success');
   
-  const handleEditorChange = (content) => {setCurrentContent(content)};
-  const handleCloseAlert = () => {
-    setShowModal(false);
-  };
+  const handleEditorChange = (content) => { setCurrentContent(content); };
+  const handleCloseAlert = () => { setShowModal(false); };
 
   useEffect(() => {
     const fetchData = async () => {
       if (show && rowData) {
+        console.log(rowData)
         setId(rowData.id || '');
         setTags(rowData.tags || ''); 
         setTitle(rowData.title || '');
@@ -34,19 +34,7 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
         setLanguage(rowData.language || '');
         setSubtitle(rowData.subtitle || '');
         setReadingTime(rowData.timeRead || 0);
-        if(rowData.id !== '' && rowData.language !== null){
-          let payload = {
-            articleId: rowData.id,
-            language: rowData.language
-          }
-        //   var result = await serviceContent.getDb(payload);
-        //   if(result != null){
-        //     setContent(result.content);
-        //     setContentId(result._id.$oid);
-        //   }else{
-        //     setContent('');
-        //   }
-        }
+        setContent(rowData.content);
       }
     }
     fetchData();
@@ -152,7 +140,7 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
             </Tab>  
 
             <Tab eventKey="editor" title={t("TextEditor.Content")}>
-              {/* <Editor
+              <Editor
                 initialValue={content}
                 apiKey="4wzgc9flmneknoszija0x6ctj0ak5zct2z6c3v9181mln3t8"
                 init={{
@@ -162,7 +150,7 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
                   plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount',
                   toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
                 }}
-                onEditorChange={handleEditorChange}/> */}
+                onEditorChange={handleEditorChange}/>
             </Tab>
           </Tabs>
         </Modal.Body>
