@@ -1,3 +1,4 @@
+import './style.css';
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +16,9 @@ const ArticleCard = ({content}) => {
             <h4>{content.subtitle}</h4>
           </Card.Title>
           <Card.Text>
-            <div dangerouslySetInnerHTML={{ __html: content.content }} />
+            <div className="content"> 
+              <div dangerouslySetInnerHTML={{ __html: content.content }} />
+            </div>
           </Card.Text>
         </Card.Body>
         <Card.Footer className="text-muted">

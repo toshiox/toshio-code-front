@@ -22,9 +22,8 @@ export async function putArticle(content) {
 }
 
 export async function putArticleContent(content) {
-    console.log(content)
     const response = await apiCallers.put(`api/articleContent`, content);
-    // await apiRedis.dispose();
+    await apiRedis.dispose();
     return response.data;
 }
 

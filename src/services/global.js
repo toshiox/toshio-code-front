@@ -22,15 +22,10 @@ export async function put(route, data) {
             body: JSON.stringify(data)
         };
         const response = await fetch(`${_apiLocalUrl}${route}`, options);
-        
-        console.log(response)
         if (!response.ok) 
             throw new Error('Erro ao fazer requisição PUT: ' + response.statusText);
-        
         return await response.json();
     } catch (error) {
-        console.log(error)
-        console.error('Erro na chamada da API:', error.message);
         throw error;
     }
 }

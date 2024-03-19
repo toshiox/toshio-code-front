@@ -22,7 +22,7 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
   const [currentContent, setCurrentContent] = useState('');
   const [alertType, setAlertType] = useState('success');
   
-  const handleEditorChange = (content) => { setCurrentContent(content); };
+  const handleEditorChange = (content) => {setCurrentContent(content); };
   const handleCloseAlert = () => { setShowModal(false); };
   const handleFormSubmit = async (e) => {
     try {

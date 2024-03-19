@@ -16,7 +16,7 @@ const TextEditor = () => {
   const [filter, setFilter] = useState(undefined);
   const [selectedRowData, setSelectedRowData] = useState(null);
   const [articles, setArticles] = useState([]);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const currentLanguage = useSelector((state) => {return state.Language.value});
   const [filteredArticles, setFilteredArticles] = useState([]);
@@ -28,6 +28,21 @@ const TextEditor = () => {
     t('TextEditor.Tags'),
     t('TextEditor.CreatedAt')
   ];
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedRowData(null);
+  };
+  const handleUpdateResult = (success) => {
+    if(success){
+      setCount(count + 1);
+    }
+  };
+  const handleRowClick = (index) => {
+    setShowModal(true);
+    var id = document.getElementById("tr_id_" + index).children[0].innerHTML;
+    var value = filteredArticles.filter(item => item.id === id)[0]
+    setSelectedRowData(value);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,22 +64,6 @@ const TextEditor = () => {
       })
     );
   }, [filter, articles]);
-  
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedRowData(null);
-  };
-  const handleUpdateResult = (success) => {
-    if(success){
-      setCount(count + 1);
-    }
-  };
-  const handleRowClick = (index) => {
-    setShowModal(true);
-    var id = document.getElementById("tr_id_" + index).children[0].innerHTML;
-    var value = filteredArticles.filter(item => item.id === id)[0]
-    setSelectedRowData(value);
-  };
 
   return (
     <div>
