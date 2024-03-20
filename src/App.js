@@ -21,7 +21,7 @@ function App() {
   }, [isLoading]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '97vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         {isLoading ? <Loading /> : null}
         <NavBar/>
         <Routes>

@@ -1,28 +1,35 @@
 import './home.css'
-import { articlesSevice } from '../../services/articles'
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { loadingActions } from '../../redux/loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { articlesSevice } from '../../services/articles';
 import { Card, Col, Row, ListGroup } from 'react-bootstrap';
 
 function Home(){
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [articles, setArticles] = useState([]);
+  const currentKeyWord = useSelector((state) => {return state.KeyWord.keyWord});
   const currentLanguage = useSelector((state) => {return state.Language.value});
 
   useEffect(() => {
     const fetchData = async () => {
         dispatch(loadingActions.setLoading({ isLoading: true }));
         const response = await articlesSevice.getHome(currentLanguage);
-        setArticles(response); 
+
+        setArticles(response.filter((article) =>{
+          if(currentKeyWord !== undefined)
+            return Object.values(article).some((value) => typeof value === 'string' && value.toLowerCase().includes(currentKeyWord.toLowerCase()))
+          else
+            return article;
+        }))
+
         dispatch(loadingActions.setLoading({ isLoading: false }));
     };
     fetchData();
-  },[currentLanguage]);
+  },[currentLanguage, currentKeyWord]);
 
   return (
     <Row xs={1} md={2} className="g-4">

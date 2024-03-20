@@ -1,11 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import loadingReducer from './loading';
+import keyWordReducer from './keyWord';
 import languageReducer from './languages';
-import Loading from './loading';
+import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore({
   reducer: {
-    Language: languageReducer,
-    Loading: Loading
+    Loading: loadingReducer,
+    KeyWord: keyWordReducer,
+    Language: languageReducer
   }
 });
 
