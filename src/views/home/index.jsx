@@ -1,4 +1,4 @@
-import './home.css'
+import './home.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,12 +24,12 @@ function Home(){
             return Object.values(article).some((value) => typeof value === 'string' && value.toLowerCase().includes(currentKeyWord.toLowerCase()))
           else
             return article;
-        }))
+        }));
 
         dispatch(loadingActions.setLoading({ isLoading: false }));
     };
     fetchData();
-  },[currentLanguage, currentKeyWord]);
+  },[currentLanguage, currentKeyWord, dispatch]);
 
   return (
     <Row xs={1} md={2} className="g-4">
