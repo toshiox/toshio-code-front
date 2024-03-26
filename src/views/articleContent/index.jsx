@@ -15,18 +15,14 @@ const ArticleContent = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        dispatch(loadingActions.setLoading({ isLoading: true }));
-        const result = await articlesSevice.getById(`${id}_${currentLanguage}`);
-        result.createdAt = DateFunctions.FormatDate(new Date(result.createdAt), 'dd/MM/yyyy HH:mm');
-        setContent(result);
-        dispatch(loadingActions.setLoading({ isLoading: false }));
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-      }
+      dispatch(loadingActions.setLoading({ isLoading: true }));
+      const result = await articlesSevice.getById(`${id}_${currentLanguage}`);
+      result.createdAt = DateFunctions.FormatDate(new Date(result.createdAt), 'dd/MM/yyyy HH:mm');
+      setContent(result);
+      dispatch(loadingActions.setLoading({ isLoading: false }));
     };
     fetchData();
-  }, [id, currentLanguage]);
+  }, [id, currentLanguage, dispatch]);
 
   return <>
     <ArticleCard content={content} />

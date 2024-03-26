@@ -1,12 +1,12 @@
 import './home.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { DateFunctions } from '../../services/utils/date';
 import { useTranslation } from 'react-i18next';
 import { loadingActions } from '../../redux/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { articlesSevice } from '../../services/articles';
 import { Card, Col, Row, ListGroup } from 'react-bootstrap';
-
 function Home(){
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ function Home(){
   useEffect(() => {
     const fetchData = async () => {
         dispatch(loadingActions.setLoading({ isLoading: true }));
-        const response = await articlesSevice.getHome(currentLanguage);
+        const response = DateFunctions.SortByKeyDesc((await articlesSevice.getHome(currentLanguage)),'createdAt');
 
         setArticles(response.filter((article) =>{
           if(currentKeyWord !== undefined)

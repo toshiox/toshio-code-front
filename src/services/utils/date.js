@@ -13,6 +13,20 @@ export function FormatDate(dataString) {
     return dataFormatada;
 }
 
+export function SortByKeyDesc(list, key) {
+    return list.sort((a, b) => {
+      const valueA = a[key];
+      const valueB = b[key];
+      if (valueA > valueB) {
+        return -1;
+      } else if (valueA < valueB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
 export const DateFunctions = {
-    FormatDate
+    FormatDate,
+    SortByKeyDesc
 }
