@@ -1,41 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import './components/languageSwitcher/i18n';
 import { Provider } from 'react-redux';
-import { createBrowserRouter, RouterProvider  }from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom'; // Importe BrowserRouter
 import store from './redux/store'
 
-import Home from './views/home/index';
-import NotFound from './views/notFound/index';
-
-const router =  createBrowserRouter([
-  {
-    path:'/',
-    element: <App />,
-    children: [
-    {
-      path:'/Home',
-      element: <Home />
-    },
-    {
-      path:'*',
-      element: <NotFound />
-    }
-  ],
-}]);
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}/>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 reportWebVitals();
