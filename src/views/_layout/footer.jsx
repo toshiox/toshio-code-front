@@ -1,8 +1,8 @@
+import './css/style.css';
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FaThreads } from "react-icons/fa6";
-import './css/style.css'
 
 const Footer = () => {
   return (

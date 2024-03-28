@@ -1,3 +1,4 @@
+import './css/style.css';
 import Alert from '../modal/alert';
 import { useState, useEffect } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
@@ -21,8 +22,39 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
   const [content, setContent] = useState('');
   const [currentContent, setCurrentContent] = useState('');
   const [alertType, setAlertType] = useState('success');
-  
-  const handleEditorChange = (content) => {setCurrentContent(content); };
+
+  const handleEditorChange = (content) => {
+    var codeTags = content.match(/<p>.*?<\/p>/g);
+    if(codeTags){
+      var codeContent = '';
+      var linesNumber = [];
+
+      for(var i = 0; i < codeTags.length; i++){
+        if(codeTags[i].includes("<code>") && !codeTags[i].includes('<div className="code-container">')){
+          linesNumber.push(i);
+          codeContent += codeTags[i].replace(/<\/?code>/g, '').replace(/<\/?p>/g, '');
+          console.log(codeTags[i]);
+        }
+      }
+
+      console.log(codeContent);
+
+      content = '';
+      let addCodeContainer = false;
+      for(i = 0; i < codeTags.length; i++){
+        if(!codeTags[i].includes("<code>")){
+          content += codeTags[i];
+        }else if(!addCodeContainer){
+          addCodeContainer = true;
+          content += '<div className="code-container"><code>' + codeContent + '</code></div>';
+        }
+      }
+      console.log(content);
+      // var cleanContent = combinedCode.replace(/<\/?code>/g, '');
+      // var xxx = '<div className="code-container"><code>' + cleanContent + '</code></div>';
+    }
+    setCurrentContent(content); 
+  };
   const handleCloseAlert = () => { setShowModal(false); };
   const handleFormSubmit = async (e) => {
     try {
@@ -52,7 +84,7 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
     setAlertType('success');
     onUpdate(result.success);
     return result.success;
-  }
+  };
   const putArticleContent = async () => {
     let payload = {
       id: contentId,
@@ -66,7 +98,7 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
     setAlertType('success');
     onUpdate(result.success);
     return result.success;
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
