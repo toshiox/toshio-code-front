@@ -1,0 +1,31 @@
+.csharp-container {
+    background-color: #1e1e1e;
+    color: #dcdcdc;
+    font-family: 'Consolas', 'Monaco', monospace;
+	font-size:14px;
+	border-left: 5px solid #ee4d2e;
+    padding: 10px;
+    margin: 20px 0;
+    white-space: pre-wrap;
+}
+.csharp-keyword {
+    color: #569cd6; 
+}
+.csharp-number {
+    color: #b5cea8; 
+}
+.csharp-variable {
+    color: #9CDCFE; 
+}
+.csharp-class-name {
+    color: #6A9955; 
+}
+.csharp-method-name {
+    color: #f0f33d; 
+}
+.csharp-operator {
+    color: #dcdcdc; 
+}
+.csharp-comment {
+    color: #6A9955; 
+}

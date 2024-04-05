@@ -7,6 +7,7 @@ import { loadingActions } from '../../redux/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { articlesSevice } from '../../services/articles';
 import { Card, Col, Row, ListGroup } from 'react-bootstrap';
+
 function Home(){
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -18,14 +19,13 @@ function Home(){
     const fetchData = async () => {
         dispatch(loadingActions.setLoading({ isLoading: true }));
         const response = DateFunctions.SortByKeyDesc((await articlesSevice.getHome(currentLanguage)),'createdAt');
-
+        console.log(response);
         setArticles(response.filter((article) =>{
           if(currentKeyWord !== undefined)
             return Object.values(article).some((value) => typeof value === 'string' && value.toLowerCase().includes(currentKeyWord.toLowerCase()))
           else
             return article;
         }));
-
         dispatch(loadingActions.setLoading({ isLoading: false }));
     };
     fetchData();

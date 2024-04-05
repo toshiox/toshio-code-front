@@ -1,5 +1,7 @@
 import './style.css';
 import React from 'react';
+import '../_styles/ruby.css';
+import '../_styles/csharp.css';
 import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -7,7 +9,7 @@ const ArticleCard = ({content}) => {
   const { t } = useTranslation();
   return (
     <>
-      <Card className="text-center">
+      <Card className="text-center content-margin">
         <Card.Header>
           <h2>{content.title}</h2>
         </Card.Header>

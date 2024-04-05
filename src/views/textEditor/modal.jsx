@@ -1,11 +1,12 @@
 import './css/style.css';
 import Alert from '../modal/alert';
 import { useState, useEffect } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
 import { useTranslation } from 'react-i18next';
+import { Editor } from '@tinymce/tinymce-react';
 import { articlesSevice } from '../../services/articles';
-import { Modal, Button, Tabs, Tab, Form, Row, Col} from 'react-bootstrap';
 import { DateFunctions } from '../../services/utils/date';
+import { textFunctions } from '../../services/utils/textEditor';
+import { Modal, Button, Tabs, Tab, Form, Row, Col} from 'react-bootstrap';
 
 const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }) => {
   const { t } = useTranslation();
@@ -23,37 +24,9 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
   const [currentContent, setCurrentContent] = useState('');
   const [alertType, setAlertType] = useState('success');
 
-  const handleEditorChange = (content) => {
-    var codeTags = content.match(/<p>.*?<\/p>/g);
-    if(codeTags){
-      var codeContent = '';
-      var linesNumber = [];
-
-      for(var i = 0; i < codeTags.length; i++){
-        if(codeTags[i].includes("<code>") && !codeTags[i].includes('<div className="code-container">')){
-          linesNumber.push(i);
-          codeContent += codeTags[i].replace(/<\/?code>/g, '').replace(/<\/?p>/g, '');
-          console.log(codeTags[i]);
-        }
-      }
-
-      console.log(codeContent);
-
-      content = '';
-      let addCodeContainer = false;
-      for(i = 0; i < codeTags.length; i++){
-        if(!codeTags[i].includes("<code>")){
-          content += codeTags[i];
-        }else if(!addCodeContainer){
-          addCodeContainer = true;
-          content += '<div className="code-container"><code>' + codeContent + '</code></div>';
-        }
-      }
-      console.log(content);
-      // var cleanContent = combinedCode.replace(/<\/?code>/g, '');
-      // var xxx = '<div className="code-container"><code>' + cleanContent + '</code></div>';
-    }
-    setCurrentContent(content); 
+  const handleEditorChange = function(content){
+    setContent(content);
+    setCurrentContent(content);
   };
   const handleCloseAlert = () => { setShowModal(false); };
   const handleFormSubmit = async (e) => {
@@ -172,17 +145,9 @@ const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }
             </Tab>  
 
             <Tab eventKey="editor" title={t("TextEditor.Content")}>
-              <Editor
-                initialValue={content}
-                apiKey="4wzgc9flmneknoszija0x6ctj0ak5zct2z6c3v9181mln3t8"
-                init={{
-                  height: 600,
-                  menubar: true,
-                  plugin_version: '6.6.0',
-                  plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount',
-                  toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-                }}
-                onEditorChange={handleEditorChange}/>
+              <Form>
+                  <Form.Control as="textarea" rows={3} value={content} onChange={(e) => handleEditorChange(e.target.value)} />
+              </Form>
             </Tab>
           </Tabs>
         </Modal.Body>

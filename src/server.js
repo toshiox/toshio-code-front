@@ -20,5 +20,4 @@ app.get('/home', (req, res) => {
 // Define a porta e inicia o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor iniciado na porta ${PORT}`);
 });

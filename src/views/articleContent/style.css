@@ -2,3 +2,8 @@
     text-align: justify;
     text-justify: inter-word;  
 }
+
+.content-margin{
+    margin-left:15%;
+    margin-right:15%;
+}

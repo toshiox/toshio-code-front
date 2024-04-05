@@ -84,8 +84,8 @@ const TextEditor = () => {
         </thead>
         <tbody>
           {filteredArticles.map((item, index)=> (
-            <tr key={item._id.$oid } id={`tr_id_${index}`} onClick={() => handleRowClick(index)}>
-              <td>{item._id.$oid}</td>
+            <tr key={item.id } id={`tr_id_${index}`} onClick={() => handleRowClick(index)}>
+              <td>{item.id}</td>
               <td>{item.title}</td>
               <td>{item.subtitle}</td>
               <td>{item.resume}</td>

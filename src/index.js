@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import './components/languageSwitcher/i18n';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom'; // Importe BrowserRouter
+import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store'
 
 ReactDOM.render(
