@@ -20,11 +20,11 @@ function App() {
     fetchData();
   }, [isLoading]);
 
-  useEffect(() => {
-    if (window.location.protocol === 'http:') {
-      window.location.href = window.location.href.replace('http:', 'https:');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.location.protocol === 'http:') {
+  //     window.location.href = window.location.href.replace('http:', 'https:');
+  //   }
+  // }, []);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
