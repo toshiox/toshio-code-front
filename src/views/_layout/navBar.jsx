@@ -1,13 +1,13 @@
+import './css/style.css';
 import { useState } from 'react';
+import logo from './assets/logo.png';
 import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { FaInfoCircle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import {navigatorFunctions} from '../../services/utils/navigator';
-import { Navbar, Container, Nav, Form, Image, Button } from 'react-bootstrap';
-
-import logo from './assets/logo.png';
-import './css/style.css';
+import { Navbar, Container, Nav, Form, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { keyWordActions } from '../../redux/keyWord';
 import { languageActions } from '../../redux/languages';
@@ -26,15 +26,23 @@ const NavBar = () => {
     });
     dispatch(languageActions.setLanguage({ value: newLanguage }));
   };
-
   const languageOptions = [
     { value: 'en', label: t('Languages.English') },
     { value: 'pt', label: t('Languages.Portuguese') },
   ];
-
-  const HandleFilterKewWord = () => {
+  const HandleFilterKewWord = function(keyWordFilter) {
+    setKeyWord(keyWordFilter);
     dispatch(keyWordActions.setKeyWord({ value: keyWord }));
   }
+  const handleFocusOut = (event) => {
+    HandleFilterKewWord(event.target.value);
+  };
+  const handleKeyPress = (event) => {
+    if(event.keyCode === 13 || event.which === 13) { // keyCode 13 é para Enter. event.which para compatibilidade
+      HandleFilterKewWord(event.target.value);
+      event.preventDefault();
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +52,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <Navbar  bg="dark" data-bs-theme="dark">
+    <Navbar bg="dark" data-bs-theme="dark">
         <Container fluid>
           <Navbar.Brand>
             <Link to="/Home" style={{ textDecoration: 'none' }}>
@@ -66,8 +74,15 @@ const NavBar = () => {
                   </option>
                 ))}
               </Form.Select>    
-              <Form.Control type="search" placeholder={t('Inputs.PlaceHolders.KeyWord')} className="me-2" aria-label="Search" onChange={(e) => setKeyWord(e.target.value)} onKeyPress={(e) => {if (e.key === 'Enter') {e.preventDefault();}}}/>
-              <Button variant="outline-warning" onClick={HandleFilterKewWord}>{t('Buttons.Search')}</Button>
+              <Form.Control type="search" placeholder={t('Inputs.PlaceHolders.KeyWord')} className="me-2" aria-label="Search" onBlur={handleFocusOut} onKeyPress={handleKeyPress} />
+              <OverlayTrigger placement="bottom"
+                overlay={
+                  <Tooltip id="tooltip">{t('Nav.ToolTip')}</Tooltip>
+                }>
+                <span class="margin-tooltip"> 
+                  <FaInfoCircle size={20} className="text-light" style={{ cursor: "pointer" }} />
+                </span>
+              </OverlayTrigger>
             </Form>
           </Navbar.Collapse>
         </Container>

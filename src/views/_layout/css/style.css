@@ -24,3 +24,7 @@ footer {
 .loading-content {
     color: #ffffff;
 }  
+
+.margin-tooltip{
+    margin-top: 7px;
+}

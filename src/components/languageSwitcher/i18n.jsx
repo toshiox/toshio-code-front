@@ -9,7 +9,8 @@ i18n
         translation: {
           Nav: {
             AboutMe: "About Me",
-            TextEditor: "TextEditor"
+            TextEditor: "TextEditor",
+            ToolTip: "Enter a topic to quickly search the articles. The filter is activated with Enter or FocusOut"
           },
           Languages: {
             English: 'English',
@@ -55,7 +56,8 @@ i18n
         translation: {
           Nav: {
             AboutMe: "Sobre Mim",
-            TextEditor: "Editor de Texto"
+            TextEditor: "Editor de Texto",
+            ToolTip: "Insira um tópico para pesquisar rapidamente os artigos. O filtro é ativado com Enter ou FocusOut"
           },
           Languages: {
             English: 'Inglês',
