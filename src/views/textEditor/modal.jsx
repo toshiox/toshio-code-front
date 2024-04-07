@@ -2,10 +2,8 @@ import './css/style.css';
 import Alert from '../modal/alert';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Editor } from '@tinymce/tinymce-react';
 import { articlesSevice } from '../../services/articles';
 import { DateFunctions } from '../../services/utils/date';
-import { textFunctions } from '../../services/utils/textEditor';
 import { Modal, Button, Tabs, Tab, Form, Row, Col} from 'react-bootstrap';
 
 const DetailsModal = ({ show, handleClose, rowData, modalSize = 'lg', onUpdate }) => {

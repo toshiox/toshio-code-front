@@ -19,7 +19,6 @@ function Home(){
     const fetchData = async () => {
         dispatch(loadingActions.setLoading({ isLoading: true }));
         const response = DateFunctions.SortByKeyDesc((await articlesSevice.getHome(currentLanguage)),'createdAt');
-        console.log(response);
         setArticles(response.filter((article) =>{
           if(currentKeyWord !== undefined)
             return Object.values(article).some((value) => typeof value === 'string' && value.toLowerCase().includes(currentKeyWord.toLowerCase()))

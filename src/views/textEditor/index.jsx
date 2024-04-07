@@ -10,16 +10,15 @@ import { DateFunctions } from '../../services/utils/date';
 
 
 const TextEditor = () => {
-  const [count, setCount] = useState(0);
-  const [data, setData] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [filter, setFilter] = useState(undefined);
-  const [selectedRowData, setSelectedRowData] = useState(null);
-  const [articles, setArticles] = useState([]);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const currentLanguage = useSelector((state) => {return state.Language.value});
+  const [count, setCount] = useState(0);
+  const [articles, setArticles] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [filter, setFilter] = useState(undefined);
   const [filteredArticles, setFilteredArticles] = useState([]);
+  const [selectedRowData, setSelectedRowData] = useState(null);
+  const currentLanguage = useSelector((state) => {return state.Language.value});
   const columns = [
     'ID', 
     t('TextEditor.Title'),
@@ -52,7 +51,7 @@ const TextEditor = () => {
         dispatch(loadingActions.setLoading({ isLoading: false }));
     };
     fetchData();
-  },[currentLanguage]);
+  },[currentLanguage, dispatch]);
 
   useEffect(() => {
     setFilteredArticles(

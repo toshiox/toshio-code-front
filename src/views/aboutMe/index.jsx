@@ -25,7 +25,7 @@ const ArticleContent = () => {
       }
     };
     fetchData();
-  }, [id, currentLanguage]);
+  }, [id, currentLanguage, dispatch]);
 
   return <><ArticleCard content={content} /></>
 };

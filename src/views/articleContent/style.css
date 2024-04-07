@@ -3,7 +3,12 @@
     text-justify: inter-word;  
 }
 
-.content-margin{
+.content-margin-web{
     margin-left:15%;
     margin-right:15%;
+}
+
+.content-margin-mobile{
+    margin-left:0%;
+    margin-right:0%;
 }

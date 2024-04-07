@@ -9,7 +9,7 @@ const ArticleCard = ({content}) => {
   const { t } = useTranslation();
   return (
     <>
-      <Card className="text-center content-margin">
+      <Card id ="card-content" className="text-center">
         <Card.Header>
           <h2>{content.title}</h2>
         </Card.Header>

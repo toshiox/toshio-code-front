@@ -48,7 +48,6 @@ function indentCode(code) {
             indentedCode += '\t'.repeat(indentationLevel) + line.trim() + '\n';
         }
     }
-    console.log(indentedCode);
     return indentedCode;
 }
 
