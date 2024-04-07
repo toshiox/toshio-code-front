@@ -2,10 +2,10 @@ import './css/style.css';
 import { useState } from 'react';
 import logo from './assets/logo.png';
 import React, {useEffect} from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaInfoCircle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { Link, useLocation } from 'react-router-dom';
 import {navigatorFunctions} from '../../services/utils/navigator';
 import { Navbar, Container, Nav, Form, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
@@ -13,10 +13,12 @@ import { keyWordActions } from '../../redux/keyWord';
 import { languageActions } from '../../redux/languages';
 
 const NavBar = () => {
-  const { t, i18n } = useTranslation();
+  const location = useLocation();
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
   const [keyWord, setKeyWord] = useState(''); 
   const [showNav, setShowNav] = useState(true); 
+  const [showFilters, setFilters] = useState(true); 
 
   const handleLanguageChange = (newLanguage) => {
     i18n.changeLanguage(newLanguage, (err, t) => {
@@ -47,9 +49,10 @@ const NavBar = () => {
   useEffect(() => {
     const fetchData = async () => {
       setShowNav(!navigatorFunctions.isMobile());
+      setFilters(location.pathname === '/Home');
     };
     fetchData();
-  }, []);
+  }, [location]);
 
   return (
     <Navbar bg="dark" data-bs-theme="dark">
@@ -66,24 +69,28 @@ const NavBar = () => {
                 <Nav.Link as={Link} to="/AboutMe">{t('Nav.AboutMe')}</Nav.Link>
               </Nav>
             )}
-            <Form className="d-flex">
-              <Form.Select onChange={(e) => handleLanguageChange(e.target.value)}>
-                {languageOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </Form.Select>    
-              <Form.Control type="search" placeholder={t('Inputs.PlaceHolders.KeyWord')} className="me-2" aria-label="Search" onBlur={handleFocusOut} onKeyPress={handleKeyPress} />
-              <OverlayTrigger placement="bottom"
-                overlay={
-                  <Tooltip id="tooltip">{t('Nav.ToolTip')}</Tooltip>
-                }>
-                <span class="margin-tooltip"> 
-                  <FaInfoCircle size={20} className="text-light" style={{ cursor: "pointer" }} />
-                </span>
-              </OverlayTrigger>
-            </Form>
+              <Form className="d-flex">
+                <Form.Select onChange={(e) => handleLanguageChange(e.target.value)}>
+                  {languageOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Form.Select>    
+                  {showFilters && (
+                    <>
+                      <Form.Control type="search" placeholder={t('Inputs.PlaceHolders.KeyWord')} className="me-2" aria-label="Search" onBlur={handleFocusOut} onKeyPress={handleKeyPress} />
+                      <OverlayTrigger placement="bottom"
+                        overlay={
+                          <Tooltip id="tooltip">{t('Nav.ToolTip')}</Tooltip>
+                        }>
+                        <span className="margin-tooltip"> 
+                          <FaInfoCircle size={20} className="text-light" style={{ cursor: "pointer" }} />
+                        </span>
+                      </OverlayTrigger>
+                    </>
+                )}
+              </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
