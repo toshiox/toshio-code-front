@@ -5,12 +5,12 @@ import React, {useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import { FaInfoCircle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { keyWordActions } from '../../redux/keyWord';
 import { Link, useLocation } from 'react-router-dom';
+import { languageActions } from '../../redux/languages';
 import {navigatorFunctions} from '../../services/utils/navigator';
 import { Navbar, Container, Nav, Form, Image, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-import { keyWordActions } from '../../redux/keyWord';
-import { languageActions } from '../../redux/languages';
 
 const NavBar = () => {
   const location = useLocation();

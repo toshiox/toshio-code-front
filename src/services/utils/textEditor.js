@@ -14,7 +14,7 @@ function HighlightCSharpCode(inputString) {
     return highlightedCode;
 }
 
-export function HighlightRubyCode(inputString) {
+function HighlightRubyCode(inputString) {
     let rubyRegex = /<Ruby>([\s\S]*?)<\/Ruby>/g;
     let highlightedCode = inputString.replace(rubyRegex, (match, p1) => {
         let highlightedRuby = p1;
