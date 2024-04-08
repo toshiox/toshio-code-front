@@ -1,7 +1,5 @@
 import './style.css';
 import React from 'react';
-import '../_styles/ruby.css';
-import '../_styles/csharp.css';
 import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 

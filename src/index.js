@@ -1,13 +1,11 @@
 import './index.css';
 import App from './App';
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
-
-import './components/languageSwitcher/i18n';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store'
+import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom/client';
+import './components/languageSwitcher/i18n';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,5 +17,3 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-reportWebVitals();

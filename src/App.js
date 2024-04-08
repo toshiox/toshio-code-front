@@ -4,6 +4,8 @@ import NavBar from './views/_layout/navBar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
+import './views/_styles/ruby.css';
+import './views/_styles/csharp.css';
 import Home from './views/home/index'
 import Footer from './views/_layout/footer';
 import AboutMe from './views/aboutMe/index';
