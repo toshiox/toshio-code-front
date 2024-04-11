@@ -8,7 +8,6 @@ import './views/_styles/ruby.css';
 import './views/_styles/csharp.css';
 import Home from './views/home/index'
 import Footer from './views/_layout/footer';
-import AboutMe from './views/aboutMe/index';
 import NotFound from './views/notFound/index';
 import Loading from './views/_layout/loading';
 import ArticleContent from './views/articleContent/index';
@@ -34,7 +33,6 @@ function App() {
           <Route path="*" element={<Navigate to="/not-found" />} />
 
           <Route path="/sxz" element={<TextEditor/>}/>
-          <Route path="/AboutMe" element={<AboutMe />} />
           <Route path="/Article/:id?" element={<ArticleContent />} />
         </Routes>
         <Footer/>

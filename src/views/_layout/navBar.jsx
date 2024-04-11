@@ -66,7 +66,7 @@ const NavBar = () => {
           <Navbar.Collapse id="navbarScroll">
             {showNav && (
               <Nav className="me-auto"  navbarScroll>
-                <Nav.Link as={Link} to="/AboutMe">{t('Nav.AboutMe')}</Nav.Link>
+                <Nav.Link as={Link} to="/article/654a44012bd6ebb1202d3c77">{t('Nav.AboutMe')}</Nav.Link>
               </Nav>
             )}
               <Form className="d-flex">

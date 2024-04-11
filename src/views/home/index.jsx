@@ -18,13 +18,21 @@ function Home(){
   useEffect(() => {
     const fetchData = async () => {
         dispatch(loadingActions.setLoading({ isLoading: true }));
-        const response = DateFunctions.SortByKeyDesc((await articlesSevice.getHome(currentLanguage)),'createdAt');
-        setArticles(response.filter((article) =>{
-          if(currentKeyWord !== undefined)
-            return Object.values(article).some((value) => typeof value === 'string' && value.toLowerCase().includes(currentKeyWord.toLowerCase()))
-          else
-            return article;
+        const response = await articlesSevice.getHome(currentLanguage);
+        console.log(response);
+        setArticles(response.filter((article) => {
+          if (currentKeyWord !== undefined) {
+            return Object.entries(article).some(([key, value]) => {
+              console.log(key);
+              console.log(value);
+              if (key !== 'content' && typeof value === 'string') {
+                return value.toLowerCase().includes(currentKeyWord.toLowerCase());
+              }
+              return false;
+            });
+          }
         }));
+        
         dispatch(loadingActions.setLoading({ isLoading: false }));
     };
     fetchData();
