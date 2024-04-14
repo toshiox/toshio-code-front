@@ -5,6 +5,7 @@
     padding: 10px;
     margin: 20px 0;
     white-space: pre-wrap;
+    color:white;
 }
 .ruby-keyword {
     color: #ec2d86;
@@ -30,5 +31,14 @@
  color: #df5000;
 }
 .ruby-method-name{
-    color: #dadd31; 
+    color: #dcf11b; 
+}
+.ruby-green{
+    color: #25b113; 
+}
+.ruby-argument {
+    color: #96ccf8; 
+}
+.ruby-argument-dark {
+    color: #329bf1; 
 }

@@ -18,20 +18,42 @@ function HighlightRubyCode(inputString) {
     let rubyRegex = /<Ruby>([\s\S]*?)<\/Ruby>/g;
     let highlightedCode = inputString.replace(rubyRegex, (match, p1) => {
         let highlightedRuby = p1;
-        highlightedRuby = highlightedRuby.replace(/=/g, '<span class="ruby-variable">=</span>');
-        highlightedRuby = highlightedRuby.replace(/\b(def)\s+(\w+)\b/g, '<span class="ruby-keyword">$1</span> <span class="ruby-method-name">$2</span>');
-        highlightedRuby = highlightedRuby.replace(/v->(\w+)/g, '<span class="ruby-variable">$1</span>');
-        highlightedRuby = highlightedRuby.replace(/#(.*?)(\r\n|\r|\n)/g, '<span class="ruby-comment">#$1</span>$2');
-        highlightedRuby = highlightedRuby.replace(/'([^']*)'/g, '<span class="ruby-string">\'$1\'</span>');
-        highlightedRuby = highlightedRuby.replace(/(\bputs\b|\bprint\b|\bp\b|\bgets\b|\bputc\b|\bgets\b)/g, '<span class="ruby-method-name">$1</span>');
-        highlightedRuby = highlightedRuby.replace(/\b(end)\b/g, '<span class="ruby-keyword">$1</span>');
-        highlightedRuby = highlightedRuby.replace(/\b(\d+)\b/g, '<span class="ruby-number">$1</span>');
-        highlightedRuby = highlightedRuby.replace(/\.length/g, '<span class="ruby-variable">.length</span>');
+        highlightedRuby = highlightedRuby.replace(/(\w+)\.new/g, '<span class="ruby-green">$1</span>.new');
 
+
+        highlightedRuby = highlightedRuby.replace(/(def|class|return|describe)\s+(\w+)/g,  '<span class="ruby-keyword">$1</span> <span class="ruby-method-name">$2</span>');
+        highlightedRuby = highlightedRuby.replace(/\if/g, '<span class="ruby-keyword">if</span>');
+        highlightedRuby = highlightedRuby.replace(/\unless/g, '<span class="ruby-keyword">unless</span>');
+        highlightedRuby = highlightedRuby.replace(/\b(end|do)\b/g, '<span class="ruby-keyword">$1</span>');
+        
+        highlightedRuby = highlightedRuby.replace(/\b(ArgumentError|Float|new|Numeric|Array)\b/g, '<span class="ruby-argument">$1</span>');
+        highlightedRuby = highlightedRuby.replace(/\b(raise|nil)\b/g, '<span class="ruby-argument-dark">$1</span>');
+        
+        highlightedRuby = highlightedRuby.replace(/\bRSpec\b/g, '<span class="ruby-green">RSpec</span>');
+        
+        highlightedRuby = highlightedRuby.replace(/#(.*?)(\r\n|\r|\n)/g, '<span class="ruby-comment">#$1</span>$2');
+
+        highlightedRuby = highlightedRuby.replace(/'([^']*)'/g, '<span class="ruby-string">\'$1\'</span>');
+
+        highlightedRuby = highlightedRuby.replace(/(puts|\bprint\b|\bp\b|\bgets\b|\bputc\b|\bgets\b)/g, '<span class="ruby-method-name">$1</span>');
+        
+        highlightedRuby = highlightedRuby.replace(/\b(\d+)\b/g, '<span class="ruby-number">$1</span>');
+        
         return `<div class="ruby-container">${highlightedRuby}</div>`;
     });
-    return highlightedCode.replace(/{/g, '{').replace(/}/g, '}');
+
+    const regex = /(?:^|\s)(\w+)\.new/g;
+    let match;
+    console.log(regex.exec(highlightedCode))
+    while ((match = regex.exec(highlightedCode)) !== null) {
+        const className = match[1];
+        console.log(className);
+    }
+
+
+    return highlightedCode;
 }
+
 
 function indentCode(code) {
     let indentedCode = '';

@@ -23,8 +23,6 @@ function Home(){
         setArticles(response.filter((article) => {
           if (currentKeyWord !== undefined) {
             return Object.entries(article).some(([key, value]) => {
-              console.log(key);
-              console.log(value);
               if (key !== 'content' && typeof value === 'string') {
                 return value.toLowerCase().includes(currentKeyWord.toLowerCase());
               }

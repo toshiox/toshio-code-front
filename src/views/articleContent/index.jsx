@@ -18,6 +18,7 @@ const ArticleContent = () => {
   useEffect(() => {
     const fetchData = async () => {
       dispatch(loadingActions.setLoading({ isLoading: true }));
+      console.log(`${id}_${currentLanguage}`)
       const result = await articlesSevice.getById(`${id}_${currentLanguage}`);
       result.content = TextFunctions.HighlightCSharpCode(result.content);
       result.content = TextFunctions.HighlightRubyCode(result.content);

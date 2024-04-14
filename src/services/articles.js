@@ -3,10 +3,10 @@ import { apiCallers } from './global'
 import { DateFunctions } from './utils/date';
 
 export async function getHome(selectedLanguage){
-    let result = await apiRedis.listAllArticles(selectedLanguage);
-    if(result === undefined || result.length === 0){
-        result = (await apiCallers.get(`api/article/${selectedLanguage}`)).data;
-    }
+    // let result = await apiRedis.listAllArticles(selectedLanguage);
+    // if(result === undefined || result.length === 0){
+    // }
+    let result = (await apiCallers.get(`api/article/${selectedLanguage}`)).data;
     return DateFunctions.SortByKeyDesc(result, 'createdAt');
 }
 
