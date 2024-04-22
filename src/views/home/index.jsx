@@ -1,12 +1,12 @@
 import './home.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { DateFunctions } from '../../services/utils/date';
 import { useTranslation } from 'react-i18next';
 import { loadingActions } from '../../redux/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { articlesSevice } from '../../services/articles';
 import { Card, Col, Row, ListGroup } from 'react-bootstrap';
+import { FaEye } from 'react-icons/fa';
 
 function Home(){
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ function Home(){
               <ListGroup className="list-group-flush">
               <ListGroup.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div>{article.tags}</div>
-                <div>{t('Home.ReadingTime')} ~ {article.timeRead}min</div>
+                <div>{t('Home.ReadingTime')} ~ {article.timeRead}min | {article.views} <FaEye/> </div>
               </ListGroup.Item>
               </ListGroup>
             </Card>

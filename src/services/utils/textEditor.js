@@ -7,7 +7,6 @@ function HighlightCSharpCode(inputString) {
         highlightedCSharp = highlightedCSharp.replace(/(\w+)\s*\(\)/g, '<span class="csharp-method-name">$1</span>()');
         highlightedCSharp = highlightedCSharp.replace(/\/\/(.*)/g, '<span class="csharp-comment">//$1</span>');
         highlightedCSharp = highlightedCSharp.replace(/\n/g, '<br>').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
-        highlightedCSharp = highlightedCSharp.replace(/v->(\w+)/g, '<span class="csharp-variable">$1</span>');
                
         return `<div class="csharp-container">${highlightedCSharp}</div>`;
     });
@@ -19,7 +18,6 @@ function HighlightRubyCode(inputString) {
     let highlightedCode = inputString.replace(rubyRegex, (match, p1) => {
         let highlightedRuby = p1;
         highlightedRuby = highlightedRuby.replace(/(\w+)\.new/g, '<span class="ruby-green">$1</span>.new');
-
 
         highlightedRuby = highlightedRuby.replace(/(def|class|return|describe)\s+(\w+)/g,  '<span class="ruby-keyword">$1</span> <span class="ruby-method-name">$2</span>');
         highlightedRuby = highlightedRuby.replace(/\if/g, '<span class="ruby-keyword">if</span>');

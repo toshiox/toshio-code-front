@@ -3,15 +3,19 @@ import { apiCallers } from './global'
 import { DateFunctions } from './utils/date';
 
 export async function getHome(selectedLanguage){
-    // let result = await apiRedis.listAllArticles(selectedLanguage);
-    // if(result === undefined || result.length === 0){
-    // }
-    let result = (await apiCallers.get(`api/article/${selectedLanguage}`)).data;
+    let result = await apiRedis.listAllArticles(selectedLanguage);
+    if(result === undefined || result.length === 0){
+        result = (await apiCallers.get(`api/article/${selectedLanguage}`)).data;
+    }
     return DateFunctions.SortByKeyDesc(result, 'createdAt');
 }
 
 export async function getById(id){
     return await apiRedis.getById(id);
+}
+
+export async function getCounter(id){
+    return await apiCallers.get(`api/views/count/${id}`);
 }
 
 export async function getAllArticles(){
@@ -31,6 +35,7 @@ export async function putArticleContent(content) {
 export const articlesSevice = {
     getHome,
     getById,
+    getCounter,
     getAllArticles,
 
     putArticle,
