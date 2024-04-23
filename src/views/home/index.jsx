@@ -19,7 +19,6 @@ function Home(){
     const fetchData = async () => {
         dispatch(loadingActions.setLoading({ isLoading: true }));
         const response = await articlesSevice.getHome(currentLanguage);
-        console.log(response);
         setArticles(response.filter((article) => {
           if (currentKeyWord !== undefined) {
             return Object.entries(article).some(([key, value]) => {

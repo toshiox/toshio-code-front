@@ -1,10 +1,9 @@
-// const _apiLocalUrl = `http://127.0.0.1:4567/`;
-const _apiLocalUrl = `https://code-ruby-d09fcda02656.herokuapp.com/`;
+const _apiLocalUrl = `http://127.0.0.1:4567/`;
+// const _apiLocalUrl = `https://code-ruby-d09fcda02656.herokuapp.com/`;
 
 export async function get(route) {
     try {
         const response = await fetch(`${_apiLocalUrl}${route}`);
-        console.log(response)
         if (!response.ok) 
             throw new Error(`Erro na solicitação: ${response.status} - ${response.statusText}`);
         return await response.json();

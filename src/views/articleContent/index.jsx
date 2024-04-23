@@ -20,11 +20,12 @@ const ArticleContent = () => {
       dispatch(loadingActions.setLoading({ isLoading: true }));
       await articlesSevice.getCounter(id);
       const result = await articlesSevice.getById(`${id}_${currentLanguage}`);
-      result.content = TextFunctions.HighlightCSharpCode(result.content);
-      result.content = TextFunctions.HighlightRubyCode(result.content);
-      result.createdAt = DateFunctions.FormatDate(new Date(result.createdAt), 'dd/MM/yyyy HH:mm');
+      let json = JSON.parse(result);
+      json.content = TextFunctions.HighlightCSharpCode(json.content);
+      json.content = TextFunctions.HighlightRubyCode(json.content);
+      json.createdAt = DateFunctions.FormatDate(new Date(json.createdAt), 'dd/MM/yyyy HH:mm');
       functions.SetContentClass();
-      setContent(result);
+      setContent(json);
       dispatch(loadingActions.setLoading({ isLoading: false }));
     };
     fetchData();

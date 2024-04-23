@@ -24,10 +24,10 @@ function HighlightRubyCode(inputString) {
         highlightedRuby = highlightedRuby.replace(/\unless/g, '<span class="ruby-keyword">unless</span>');
         highlightedRuby = highlightedRuby.replace(/\b(end|do)\b/g, '<span class="ruby-keyword">$1</span>');
         
-        highlightedRuby = highlightedRuby.replace(/\b(ArgumentError|Float|new|Numeric|Array)\b/g, '<span class="ruby-argument">$1</span>');
+        highlightedRuby = highlightedRuby.replace(/\b(StandardError|ArgumentError|Float|new|Numeric|Array|Collection|Client)\b/g, '<span class="ruby-argument">$1</span>');
         highlightedRuby = highlightedRuby.replace(/\b(raise|nil)\b/g, '<span class="ruby-argument-dark">$1</span>');
         
-        highlightedRuby = highlightedRuby.replace(/\bRSpec\b/g, '<span class="ruby-green">RSpec</span>');
+        highlightedRuby = highlightedRuby.replace(/\b(RSpec|Mongo)\b/g, '<span class="ruby-green">$1</span>');
         
         highlightedRuby = highlightedRuby.replace(/#(.*?)(\r\n|\r|\n)/g, '<span class="ruby-comment">#$1</span>$2');
 
@@ -39,16 +39,11 @@ function HighlightRubyCode(inputString) {
         
         return `<div class="ruby-container">${highlightedRuby}</div>`;
     });
-
     const regex = /(?:^|\s)(\w+)\.new/g;
     let match;
-    console.log(regex.exec(highlightedCode))
     while ((match = regex.exec(highlightedCode)) !== null) {
         const className = match[1];
-        console.log(className);
     }
-
-
     return highlightedCode;
 }
 
