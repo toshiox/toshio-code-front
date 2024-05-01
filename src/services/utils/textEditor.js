@@ -25,25 +25,27 @@ function HighlightRubyCode(inputString) {
         highlightedRuby = highlightedRuby.replace(/\b(end|do)\b/g, '<span class="ruby-keyword">$1</span>');
         
         highlightedRuby = highlightedRuby.replace(/\b(StandardError|ArgumentError|Float|new|Numeric|Array|Collection|Client)\b/g, '<span class="ruby-argument">$1</span>');
-        highlightedRuby = highlightedRuby.replace(/\b(raise|nil)\b/g, '<span class="ruby-argument-dark">$1</span>');
+        highlightedRuby = highlightedRuby.replace(/@\w+/g, (match) => {
+            return `<span class="ruby-argument">${match}</span>`;
+        });
+        highlightedRuby = highlightedRuby.replace(/\b(raise|nil|false|true|private|require|require_relative)\b/g, '<span class="ruby-argument-dark">$1</span>');
         
         highlightedRuby = highlightedRuby.replace(/\b(RSpec|Mongo)\b/g, '<span class="ruby-green">$1</span>');
         
         highlightedRuby = highlightedRuby.replace(/#(.*?)(\r\n|\r|\n)/g, '<span class="ruby-comment">#$1</span>$2');
 
-        highlightedRuby = highlightedRuby.replace(/'([^']*)'/g, '<span class="ruby-string">\'$1\'</span>');
+        highlightedRuby = highlightedRuby.replace(/\b(\d+)\b/g, '<span class="ruby-number">$1</span>');
+
+        highlightedRuby = highlightedRuby.replace(/'(.*?)'/g, (match, content) => {
+            const contentWithoutSpan = content.replace(/<span\s[^>]*>(.*?)<\/span>/g, '$1');
+            return `<span class="ruby-string">'${contentWithoutSpan}'</span>`;
+        });
 
         highlightedRuby = highlightedRuby.replace(/(puts|\bprint\b|\bp\b|\bgets\b|\bputc\b|\bgets\b)/g, '<span class="ruby-method-name">$1</span>');
         
-        highlightedRuby = highlightedRuby.replace(/\b(\d+)\b/g, '<span class="ruby-number">$1</span>');
-        
         return `<div class="ruby-container">${highlightedRuby}</div>`;
     });
-    const regex = /(?:^|\s)(\w+)\.new/g;
-    let match;
-    while ((match = regex.exec(highlightedCode)) !== null) {
-        const className = match[1];
-    }
+    
     return highlightedCode;
 }
 

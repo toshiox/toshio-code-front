@@ -7,6 +7,12 @@
     white-space: pre-wrap;
     color:white;
 }
+.ruby-font-size-web{
+    font-size: 16px;
+}
+.ruby-font-size-mobile{
+    font-size: 12px;
+}
 .ruby-keyword {
     color: #ec2d86;
     font-weight: bold;
