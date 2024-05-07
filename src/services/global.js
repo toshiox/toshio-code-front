@@ -1,5 +1,5 @@
 // const _apiLocalUrl = `http://127.0.0.1:4567/`;
-const _apiLocalUrl = `http://191.235.113.114:443/`;
+const _apiLocalUrl = `https://191.235.113.114/`;
 
 export async function get(route) {
     try {
