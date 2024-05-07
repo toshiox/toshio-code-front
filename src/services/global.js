@@ -1,5 +1,5 @@
 // const _apiLocalUrl = `http://127.0.0.1:4567/`;
-const _apiLocalUrl = `https://code-ruby-d09fcda02656.herokuapp.com/`;
+const _apiLocalUrl = `http://191.235.113.114:80/`;
 
 export async function get(route) {
     try {
