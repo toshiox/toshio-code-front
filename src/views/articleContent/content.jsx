@@ -12,9 +12,6 @@ const ArticleCard = ({content}) => {
           <h2>{content.title}</h2>
         </Card.Header>
         <Card.Body>
-          <Card.Title>
-            <h4>{content.subtitle}</h4>
-          </Card.Title>
           <Card.Text>
             <div className="content"> 
               <div dangerouslySetInnerHTML={{ __html: content.content }} />
