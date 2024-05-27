@@ -1,3 +1,11 @@
+function HighLight(inputString){
+    inputString = HighlightCSharpCode(inputString);
+    inputString = HighlightRubyCode(inputString);
+    inputString = HighlightDockerFile(inputString);
+    inputString = HighlightDockerCompose(inputString);
+    return inputString;
+}
+
 function HighlightCSharpCode(inputString) {
     let csharpRegex = /<C#>([\s\S]*?)<\/C#>/g;
     let highlightedCode = inputString.replace(csharpRegex, (match, p1) => {
@@ -12,7 +20,6 @@ function HighlightCSharpCode(inputString) {
     });
     return highlightedCode;
 }
-
 function HighlightRubyCode(inputString) {
     let rubyRegex = /<Ruby>([\s\S]*?)<\/Ruby>/g;
     let highlightedCode = inputString.replace(rubyRegex, (match, p1) => {
@@ -48,6 +55,32 @@ function HighlightRubyCode(inputString) {
     
     return highlightedCode;
 }
+function HighlightDockerFile(inputString) {
+    let dockerRegex = /<DockerFile>([\s\S]*?)<\/DockerFile>/g;
+    let highlightedCode = inputString.replace(dockerRegex, (match, p1) => {
+        let highlighted = p1;
+        
+        highlighted = highlighted.replace(/"(.*?)"/g, (match, content) => {
+            return `<span class="doc-string">"${content}"</span>`;
+        });
+        
+        highlighted = highlighted.replace(/\bruby\b(?!([^<]*>|[^<>]*<\/span>))/g, '<span class="doc-green">ruby</span>');
+        highlighted = highlighted.replace(/\b(FROM|WORKDIR|COPY|RUN|EXPOSE|CMD)\b/g, '<span class="doc-keyword">$1</span>');
+        highlighted = highlighted.replace(/(\[|\])/g, '<span class="doc-yellow">$1</span>');
+        
+        return `<div class="doc-container">${highlighted}</div>`;
+    });
+    return highlightedCode;
+}
+function HighlightDockerCompose(inputString) {
+    let dockerRegex = /<DockerCompose>([\s\S]*?)<\/DockerCompose>/g;
+    let highlightedCode = inputString.replace(dockerRegex, (match, p1) => {
+        let highlighted = p1;
+        highlighted = highlighted.replace(/(:|-)\s*([^,\n]+)/g, (m, p1, p2) => `${p1} <span class="doc-comp-string">${p2.trim()}</span>`);
+        return `<div class="doc-comp-container">${highlighted}</div>`;
+    });
+    return highlightedCode;
+}
 
 
 function indentCode(code) {
@@ -69,6 +102,9 @@ function indentCode(code) {
 }
 
 export const TextFunctions = {
+    HighLight,
+    
     HighlightCSharpCode,
-    HighlightRubyCode
+    HighlightRubyCode,
+    HighlightDockerFile
 }

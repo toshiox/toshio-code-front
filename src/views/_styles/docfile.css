@@ -1,0 +1,27 @@
+.doc-container {
+    font-family: monospace;
+    background-color: #1e1e1e;
+    border-left: 5px solid #ee4d2e;
+    padding: 10px;
+    margin: 20px 0;
+    white-space: pre-wrap;
+    color:#569CD6;
+}
+.doc-font-size-web{
+    font-size: 16px;
+}
+.doc-font-size-mobile{
+    font-size: 12px;
+}
+.doc-keyword{
+    color:#C586B4
+}
+.doc-green{
+    color:#4EC9B0;
+}
+.doc-yellow{
+    color:#FFD700;
+}
+.doc-string{
+    color:#CE9178;
+}

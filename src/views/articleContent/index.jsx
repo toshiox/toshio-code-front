@@ -22,8 +22,7 @@ const ArticleContent = () => {
       await articlesSevice.getCounter(id);
       const result = await articlesSevice.getById(`${id}_${currentLanguage}`);
       let json = JSON.parse(result);
-      json.content = TextFunctions.HighlightCSharpCode(json.content);
-      json.content = TextFunctions.HighlightRubyCode(json.content);
+      json.content = TextFunctions.HighLight(json.content);
       json.createdAt = DateFunctions.FormatDate(new Date(json.createdAt), 'dd/MM/yyyy HH:mm');
       functions.SetContentClass();
       setContent(json);

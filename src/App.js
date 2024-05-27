@@ -6,6 +6,9 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 
 import './views/_styles/ruby.css';
 import './views/_styles/csharp.css';
+import './views/_styles/docfile.css';
+import './views/_styles/docCompose.css';
+
 import Home from './views/home/index'
 import Footer from './views/_layout/footer';
 import NotFound from './views/notFound/index';

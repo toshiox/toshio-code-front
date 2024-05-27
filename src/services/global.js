@@ -1,5 +1,5 @@
-// const _apiLocalUrl = `http://127.0.0.1:4567/`;
-const _apiLocalUrl = `https://linux.brazilsouth.cloudapp.azure.com/`;
+const _apiLocalUrl = `http://localhost:3040/`;
+// const _apiLocalUrl = `https://linux.brazilsouth.cloudapp.azure.com/`;
 
 export async function get(route) {
     try {
