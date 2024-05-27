@@ -5,7 +5,6 @@ function HighLight(inputString){
     inputString = HighlightDockerCompose(inputString);
     return inputString;
 }
-
 function HighlightCSharpCode(inputString) {
     let csharpRegex = /<C#>([\s\S]*?)<\/C#>/g;
     let highlightedCode = inputString.replace(csharpRegex, (match, p1) => {
@@ -76,13 +75,38 @@ function HighlightDockerCompose(inputString) {
     let dockerRegex = /<DockerCompose>([\s\S]*?)<\/DockerCompose>/g;
     let highlightedCode = inputString.replace(dockerRegex, (match, p1) => {
         let highlighted = p1;
-        highlighted = highlighted.replace(/(:|-)\s*([^,\n]+)/g, (m, p1, p2) => `${p1} <span class="doc-comp-string">${p2.trim()}</span>`);
+        let currentIndent = 0;
+
+        highlighted = highlighted.replace(/(:|-)\s*([^,\n]+)/g, (m, p1, p2, offset, str) => {
+            let lineStart = str.lastIndexOf('\n', offset) + 1;
+            let line = str.slice(lineStart, offset);
+            let leadingSpaces = countLeadingSpaces(line);
+            if (p2.includes(':')) {
+                currentIndent = leadingSpaces + 2;
+                let indent = ' '.repeat(currentIndent);
+                var parts = p2.split(':');
+                if(parts[1].length > 0){
+                    let content = '';
+                    for(var i = 1; i < parts.length; i++)
+                    {
+                        if(i > 1)
+                            content+= ':';
+                        content += parts[i];
+                    }
+                    return `${p1}\n${indent}${parts[0]}:<span class="doc-comp-string">${content}</span>`;
+                }else {
+                    return `${p1}\n${indent}${parts[0]}:<span class="doc-comp-string">${parts[1]}</span>`;    
+                }
+            } else {
+                return `${p1} <span class="doc-comp-string">${p2}</span>`;
+            }
+        });
         return `<div class="doc-comp-container">${highlighted}</div>`;
     });
     return highlightedCode;
 }
 
-
+//privates
 function indentCode(code) {
     let indentedCode = '';
     let indentationLevel = 0;
@@ -100,7 +124,9 @@ function indentCode(code) {
     }
     return indentedCode;
 }
-
+function countLeadingSpaces(str) {
+    return str.match(/^\s*/)[0].length;
+}
 export const TextFunctions = {
     HighLight,
     
